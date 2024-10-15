@@ -45,9 +45,14 @@ body {
     background: var(--bg-color);
 }
 .logo {
+    position: relative;
     font-size: 2.5rem;
     color: var(--text-bg-color);
     font-weight: 600;
+}
+
+.navbar {
+    position: relative;
 }
 
 .navbar a {
@@ -62,6 +67,7 @@ body {
    color: var(--main-bg-color);
 }
 #menu-icon {
+    position: relative;
     font-size: 3.6rem;
     color: var(--text-bg-color);
     cursor: pointer;
@@ -103,10 +109,9 @@ section {
     background-image: linear-gradient(var(--main-bg-color), var(--main-bg-color));
     background-repeat: no-repeat;
     -webkit-background-clip: text;
-    background-position: 0 0;
+    background-position: -33rem 0;
     animation: homeBgText 6s linear infinite;
     animation-delay: 2s;
-    z-index: -1;
 }
 
 .home-content .text-animate h3::before {
@@ -114,7 +119,7 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
+    width: 305px;
     height: 100%;
     border-right: 2px solid var(--main-bg-color);
     z-index: -1;
@@ -230,7 +235,7 @@ section {
     transition: 3s;
 }
 .home-imghover:hover {
-    background: var(--bg-color);
+   background: var(--main-bg-color);
     opacity: .8;
 }
 .about {
@@ -277,15 +282,19 @@ span {
     border-bottom: .2rem solid var(--second-bg-color);
     border-left: .2rem solid var(--main-bg-color);
     border-right: .2rem solid var(--main-bg-color);
+    animation: aboutSpinner 8s linear infinite;
 }
 .about-content {
     text-align: center;
 
 }
 .about-content h3 {
+    position: relative;
+    display: inline-block;
     font-size: 2.6rem;
 }
 .about-content p {
+    position: relative;
     font-size: 1.6rem;
     margin: 2rem 0 3rem;
 }
@@ -570,6 +579,37 @@ span {
     color: var(--main-bg-color);
 }
 
+/* ANIMATION RELOAD AND SCROLL */
+.animate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    
+    z-index: 98;
+}
+
+
+
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate,
+.home.show-animate .animate {
+    animation: showRight 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+}
+
+.animate.scroll {
+    transition: 1s ease;
+    transition-delay: calc(.3s / var(--i));
+    animation: none;
+}
+
+.about.show-animate .animate.scroll {
+    transition-delay: calc(.3s * var(--i));
+    width: 0;
+}
 
 /* BREAKPOINTS */ 
 @media (max-width: 1200px) {
@@ -747,5 +787,17 @@ span {
     75%,
     81% {
         opacity: 0;
+    }
+}
+
+@keyframes aboutSpinner {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes showRight {
+    100% {
+        width: 0;
     }
 }
